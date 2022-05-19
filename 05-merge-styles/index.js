@@ -9,7 +9,7 @@ fs.readdir(styles, (err, files) => {
 	files.forEach(file => {
 		const fileName = file.split('.');
 		fs.stat(path.join(styles, file), (err, stats) => {
-			if (!stats.isDirectory() && fileName[1] === 'css') {
+			if (!stats.isDirectory() && path.extname(file) === '.css') {
 				const readableStream = fs.createReadStream(path.join(styles, file), 'utf-8');
 				readableStream.pipe(bundle);
 			}
